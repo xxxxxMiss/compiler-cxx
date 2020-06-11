@@ -3,12 +3,7 @@
 
 #include <string>
 #include "TokenType.h"
-class Token
-{
-public:
-  TokenType type;
-  std::string text;
-
+class Token {
 public:
   TokenType getType();
   std::string getText();
