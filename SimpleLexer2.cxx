@@ -206,24 +206,24 @@ public:
   }
 };
 
-int main(int argc, char const *argv[])
-{
-  SimpleLexer2* lexer = new SimpleLexer2();
-  std::vector<SimpleToken*> tokens;
+// int main(int argc, char const *argv[])
+// {
+//   SimpleLexer2* lexer = new SimpleLexer2();
+//   std::vector<SimpleToken*> tokens;
 
-  std::string code = "int a = 45;";
-  std::cout << "code: " << code << std::endl;
-  tokens = lexer->tokenize(code);
-  lexer->dump(tokens);
+//   std::string code = "int a = 45;";
+//   std::cout << "code: " << code << std::endl;
+//   tokens = lexer->tokenize(code);
+//   lexer->dump(tokens);
 
-  code = "inta age = 45;";
-  std::cout << "code: " << code << std::endl;
-  tokens = lexer->tokenize(code);
-  lexer->dump(tokens);
+//   code = "inta age = 45;";
+//   std::cout << "code: " << code << std::endl;
+//   tokens = lexer->tokenize(code);
+//   lexer->dump(tokens);
 
-  code = "a > 45;";
-  std::cout << "code: " << code << std::endl;
-  tokens = lexer->tokenize(code);
-  lexer->dump(tokens);
-  return 0;
-}
+//   code = "a > 45;";
+//   std::cout << "code: " << code << std::endl;
+//   tokens = lexer->tokenize(code);
+//   lexer->dump(tokens);
+//   return 0;
+// }
