@@ -1,33 +1,6 @@
-#include "./ASTNode.h"
-#include "./SimpleLexer2.cxx"
+#include "SimpleLexer.h"
+#include "SimpleASTNode.h"
 #include <algorithm>
-
-class SimpleASTNode : ASTNode {
-private:
-  SimpleASTNode* parent;
-  std::vector<SimpleASTNode*> children;
-  ASTNodeType nodeType;
-  std::string text;
-public:
-  SimpleASTNode(ASTNodeType nodeType, std::string text) : nodeType(nodeType), text(text) {
-  }
-  SimpleASTNode* getParent() {
-    return parent;
-  }
-  std::vector<SimpleASTNode*> getChildren() {
-    return children;
-  }
-  std::string getText() {
-    return text;
-  }
-  ASTNodeType getType() {
-    return nodeType;
-  }
-  void addChild(SimpleASTNode* child) {
-    children.push_back(child);
-    child->parent = this;
-  }
-};
 
 class SimpleCalculator {
 private:
@@ -84,7 +57,7 @@ public:
   }
   
   SimpleASTNode* parse(const std::string& code) {
-    SimpleLexer2 *lexer = new SimpleLexer2();
+    SimpleLexer *lexer = new SimpleLexer();
     std::vector<SimpleToken*> tokens = lexer->tokenize(code);
 
     std::reverse(tokens.begin(), tokens.end());
@@ -189,7 +162,7 @@ public:
 
 int main(int argc, char const *argv[]) {
   SimpleCalculator* calculator = new SimpleCalculator();
-  SimpleLexer2 *lexer = new SimpleLexer2();
+  SimpleLexer *lexer = new SimpleLexer();
   std::string code = "int a = b+3;";
   std::vector<SimpleToken*> tokens = lexer->tokenize(code);
   SimpleASTNode* node = calculator->intDeclare(tokens);

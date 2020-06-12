@@ -1,7 +1,11 @@
+#if !defined(__SIMPLE_LEXER__)
+#define __SIMPLE_LEXER__
+
 #include "TokenType.h"
 #include <vector>
 #include <string>
 #include <iostream>
+#include "SimpleToken.h"
 
 enum class DfaState {
   Initial,
@@ -19,35 +23,7 @@ enum class DfaState {
   IntLiteral
 };
 
-class SimpleToken {
-private:
-  TokenType type;
-  std::string text;
-public:
-  SimpleToken() {}
-  SimpleToken(TokenType type, std::string& text) : type(type), text(text) {}
-
-  TokenType getType() {
-    return type;
-  }
-  std::string getText() {
-    return text;
-  }
-  void setText(const std::string& text) {
-    this->text = text;
-  }
-  void setType(TokenType type) {
-    this->type = type;
-  }
-  // friend std::ostream& operator<<(std::ostream& os, SimpleToken* token) {}
-};
-
-// std::ostream& operator<<(std::ostream& os, SimpleToken* token) {
-//   os << token->getText() << "\t" << token->getType() << endl;
-//   return os;
-// }
-
-class SimpleLexer2 {
+class SimpleLexer {
 public:
   std::string text;
   TokenType type;
@@ -206,24 +182,4 @@ public:
   }
 };
 
-// int main(int argc, char const *argv[])
-// {
-//   SimpleLexer2* lexer = new SimpleLexer2();
-//   std::vector<SimpleToken*> tokens;
-
-//   std::string code = "int a = 45;";
-//   std::cout << "code: " << code << std::endl;
-//   tokens = lexer->tokenize(code);
-//   lexer->dump(tokens);
-
-//   code = "inta age = 45;";
-//   std::cout << "code: " << code << std::endl;
-//   tokens = lexer->tokenize(code);
-//   lexer->dump(tokens);
-
-//   code = "a > 45;";
-//   std::cout << "code: " << code << std::endl;
-//   tokens = lexer->tokenize(code);
-//   lexer->dump(tokens);
-//   return 0;
-// }
+#endif // MACRO
