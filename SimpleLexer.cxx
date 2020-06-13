@@ -138,16 +138,10 @@ public:
       }
     }
   }
-  void output() {
+  void dump() {
     for (const auto &p : tokens) {
       cout << "type: " << p.first << " text: " << p.second << "\n"
            << endl;
     }
   }
 };
-
-int main(int argc, char const *argv[]) {
-  SimpleLexer sp("int age = 45;");
-  sp.output();
-  return 0;
-}
