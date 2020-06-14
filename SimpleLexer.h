@@ -6,6 +6,7 @@
 #include <string>
 #include <iostream>
 #include "SimpleToken.h"
+#include "TokenReader.h"
 
 enum class DfaState {
   Initial,
@@ -86,7 +87,7 @@ public:
     return newState;
   }
 
-  std::vector<SimpleToken*> tokenize(const std::string& code) {
+  TokenReader* tokenize(const std::string& code) {
     tokens.resize(0);
     DfaState state = DfaState::Initial;
     char c;
@@ -170,15 +171,15 @@ public:
       initToken(c);
       text = "";
     }
-    return tokens;
+    return new TokenReader(tokens);
   }
 
-  void dump(const std::vector<SimpleToken*>& tokens) {
+  void dump(TokenReader* reader) {
     std::cout << "text\ttype" << std::endl;
-    for (auto token : tokens) {
+    SimpleToken* token;
+    while (token = reader->read()) {
       std::cout << token->getText() << std::endl;
     }
-    std::cout << "-----------------" << std::endl;
   }
 };
 

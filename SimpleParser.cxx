@@ -1,5 +1,6 @@
 #include "SimpleLexer.h"
 #include "SimpleASTNode.h"
+#include "TokenReader.h"
 #include <algorithm>
 
 class SimpleParser {
@@ -10,56 +11,59 @@ public:
 
   SimpleASTNode* parse(const std::string& script) {
     SimpleLexer *lexer = new SimpleLexer();
-    std::vector<SimpleToken*> tokens = lexer->tokenize(script);
-    lexer->dump(tokens);
+    TokenReader* tokens = lexer->tokenize(script);
+    // lexer->dump(tokens);
 
-    std::reverse(tokens.begin(), tokens.end());
     SimpleASTNode* tree = prog(tokens);
     dump(tree, "");
     return tree;
   }
 
-  SimpleASTNode* prog(std::vector<SimpleToken*> tokens) {
+  SimpleASTNode* prog(TokenReader* tokens) {
     SimpleASTNode* root = new SimpleASTNode(ASTNodeType::Programm, "pwc");
-    while (tokens.back()) {
-      SimpleASTNode* node = intDeclare(tokens);
-      if (!node) {
-        node = expressionStatement(tokens);
+    while (tokens->peek()) {
+      SimpleASTNode* child = intDeclare(tokens);
+      if (!child) {
+        child = expressionStatement(tokens);
       }
-      if (!node) {
-        node = assignmentStatement(tokens);
+      if (!child) {
+        child = assignmentStatement(tokens);
       }
-      if (!node) {
+      if (!child) {
         std::cerr << "unknow statement" << std::endl;
+        break;
       } else {
-        root->addChild(node);
+        root->addChild(child);
       }
     }
     return root;
   }
 
-  SimpleASTNode* expressionStatement(std::vector<SimpleToken*> tokens) {
+  // 表达式后面跟个分号
+  SimpleASTNode* expressionStatement(TokenReader* tokens) {
+    int pos = tokens->getPosition();
     SimpleASTNode* node = additive(tokens);
     if (node) {
-      SimpleToken* token = tokens.back();
+      SimpleToken* token = tokens->peek();
       if (token && token->getType() == TokenType::SemiColon) {
-        tokens.pop_back();
+        tokens->read();
       } else {
         // backtrace
         node = nullptr;
+        tokens->setPosition(pos);
       }
     }
     return node;
   }
 
-  SimpleASTNode* additive(std::vector<SimpleToken*> tokens) {
+  SimpleASTNode* additive(TokenReader* tokens) {
     SimpleASTNode* child1 = multiplicative(tokens);
     SimpleASTNode* node = child1;
     if (child1) {
       while (true) {
-        SimpleToken* token = tokens.back();
+        SimpleToken* token = tokens->peek();
         if (token && (token->getType() == TokenType::Plus || token->getType() == TokenType::Minus)) {
-          tokens.pop_back();
+          tokens->read();
           SimpleASTNode* child2 = multiplicative(tokens);
           if (child2) {
             node = new SimpleASTNode(ASTNodeType::Additive, token->getText());
@@ -77,13 +81,13 @@ public:
     return node;
   }
   
-  SimpleASTNode* multiplicative(std::vector<SimpleToken*> tokens) {
+  SimpleASTNode* multiplicative(TokenReader* tokens) {
     SimpleASTNode* child1 = primary(tokens);
     SimpleASTNode* node = child1;
     while (true) {
-      SimpleToken* token = tokens.back();
+      SimpleToken* token = tokens->peek();
       if (token && (token->getType() == TokenType::Star || token->getType() == TokenType::Slash)) {
-        tokens.pop_back();
+        tokens->read();
         SimpleASTNode* child2 = primary(tokens);
         if (child2) {
           node = new SimpleASTNode(ASTNodeType::Multiplicative, token->getText());
@@ -100,22 +104,22 @@ public:
     return node;
   }
 
-  SimpleASTNode* intDeclare(std::vector<SimpleToken*> tokens) {
-    SimpleToken* token = tokens.back();
+  SimpleASTNode* intDeclare(TokenReader* tokens) {
+    SimpleToken* token = tokens->peek();
     SimpleASTNode* node = nullptr;
     if (token && token->getType() == TokenType::Int) {
-      tokens.pop_back();
-      if (tokens.back()->getType() == TokenType::Identifier) {
-        tokens.pop_back();
+      tokens->read();
+      if (tokens->peek()->getType() == TokenType::Identifier) {
+        tokens->read();
         /**
          *    int
          *    /
          *  a
          */
         node = new SimpleASTNode(ASTNodeType::IntDeclaration, token->getText());
-        token = tokens.back();
+        token = tokens->peek();
         if (token && token->getType() == TokenType::Assignment) {
-          tokens.pop_back();
+          tokens->read();
           SimpleASTNode* child = additive(tokens);
           if (child) {
             node->addChild(child);
@@ -127,9 +131,9 @@ public:
         std::cerr << "variable name expected" << std::endl;
       }
       if (node) {
-        token = tokens.back();
+        token = tokens->peek();
         if (token && token->getType() == TokenType::SemiColon) {
-          tokens.pop_back();
+          tokens->read();
         } else {
           std::cerr << "Invalid int declaration, missing a semicolon" << std::endl; 
         }
@@ -138,23 +142,23 @@ public:
     return node;
   }
 
-  SimpleASTNode* assignmentStatement(std::vector<SimpleToken*> tokens) {
-    SimpleToken* token = tokens.back();
+  SimpleASTNode* assignmentStatement(TokenReader* tokens) {
+    SimpleToken* token = tokens->peek();
     SimpleASTNode* node = nullptr;
     if (token && token->getType() == TokenType::Identifier) {
-      tokens.pop_back();
+      tokens->read();
       // ast是 AssignmentStmt
       node = new SimpleASTNode(ASTNodeType::AssignmentStmt, token->getText());
-      token = tokens.back();
+      token = tokens->peek();
       if (token && token->getType() == TokenType::Assignment) {
-        tokens.pop_back();
+        tokens->read();
         SimpleASTNode* child = additive(tokens);
         if (child) {
           node->addChild(child);
-          token = tokens.back();
+          token = tokens->peek();
           // 分号并没有创建一个ast
           if (token && token->getType() == TokenType::SemiColon) {
-            tokens.pop_back();
+            tokens->read();
           } else {
             std::cerr << "Invalid expression, expecting a semicolon" << std::endl;
           }
@@ -164,28 +168,28 @@ public:
       }
     } else { // backtrace
       node = nullptr;
-      tokens.push_back(token);
+      tokens->unread();
     }
     return node;
   }
 
-  SimpleASTNode* primary(std::vector<SimpleToken*> tokens) {
-    SimpleToken* token = tokens.back();
+  SimpleASTNode* primary(TokenReader* tokens) {
+    SimpleToken* token = tokens->peek();
     SimpleASTNode* node = nullptr;
     if (token) {
       if (token->getType() == TokenType::IntLiteral) {
-        tokens.pop_back();
+        tokens->read();
         node = new SimpleASTNode(ASTNodeType::IntLiteral, token->getText());
       } else if (token->getType() == TokenType::Identifier) {
-        tokens.pop_back();
+        tokens->read();
         node = new SimpleASTNode(ASTNodeType::Identifier, token->getText());
       } else if (token->getType() == TokenType::LeftParen) {
-        tokens.pop_back();
+        tokens->read();
         node = additive(tokens);
         if (node) {
-          token = tokens.back();
+          token = tokens->peek();
           if (token->getType() == TokenType::RightParen) {
-            tokens.pop_back();
+            tokens->read();
           } else {
             std::cerr << "expecting right parenthesis" << std::endl;
           }
@@ -197,7 +201,7 @@ public:
     return node;
   }
   void dump(SimpleASTNode* tree, std::string indent) {
-    std::cout << tree->getText() << std::endl;
+    std::cout << indent + astnode_mapping[tree->getType()] << "  " << tree->getText() << std::endl;
     for (auto child : tree->getChildren()) {
       dump(child, indent + "\t");
     }
@@ -207,8 +211,12 @@ public:
 int main(int argc, char const *argv[]) {
   SimpleParser* parser = new SimpleParser();
 
-  std::string code = "int a = 1;";
+  std::string code = "a = 1 + 2 * 3;";
   parser->parse(code);
+
+  code = "2 + 5;";
+  parser->parse(code);
+  delete parser;
   /* code */
   return 0;
 }
