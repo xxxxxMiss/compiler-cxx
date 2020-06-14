@@ -1,0 +1,4 @@
+int age = 45;
+if (age >= 40) {
+  std::cout << "old man" << std::endl;
+}

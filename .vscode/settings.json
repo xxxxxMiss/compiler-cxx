@@ -51,6 +51,18 @@
     "string": "cpp",
     "string_view": "cpp",
     "system_error": "cpp",
-    "initializer_list": "cpp"
+    "initializer_list": "cpp",
+    "bitset": "cpp",
+    "list": "cpp",
+    "iomanip": "cpp",
+    "unordered_set": "cpp",
+    "chrono": "cpp",
+    "codecvt": "cpp",
+    "condition_variable": "cpp",
+    "map": "cpp",
+    "ratio": "cpp",
+    "set": "cpp",
+    "mutex": "cpp",
+    "thread": "cpp"
   }
 }
