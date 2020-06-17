@@ -1,0 +1,14 @@
+{
+  "name": "playscript",
+  "version": "1.0.0",
+  "description": "antlr4 js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "xxxxxMiss <xxxxxmiss@gmail.com> (https://github.com/xxxxxMiss)",
+  "license": "ISC",
+  "dependencies": {
+    "antlr4": "^4.8.0"
+  }
+}
