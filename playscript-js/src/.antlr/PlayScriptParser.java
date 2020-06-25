@@ -1,4 +1,4 @@
-// Generated from /Users/qsch/workspace/compiler-cxx/playscript-js/src/PlayScript.g4 by ANTLR 4.7.1
+// Generated from /Users/qsch/workspace/compiler-cxx/playscript-js/src/PlayScript.g4 by ANTLR 4.8
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
 public class PlayScriptParser extends Parser {
-	static { RuntimeMetaData.checkVersion("4.7.1", RuntimeMetaData.VERSION); }
+	static { RuntimeMetaData.checkVersion("4.8", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
 	protected static final PredictionContextCache _sharedContextCache =
@@ -50,54 +50,64 @@ public class PlayScriptParser extends Parser {
 		RULE_expressionList = 37, RULE_functionCall = 38, RULE_expression = 39, 
 		RULE_primary = 40, RULE_typeList = 41, RULE_typeType = 42, RULE_functionType = 43, 
 		RULE_primitiveType = 44, RULE_creator = 45, RULE_superSuffix = 46, RULE_arguments = 47;
-	public static final String[] ruleNames = {
-		"classDeclaration", "classBody", "classBodyDeclaration", "memberDeclaration", 
-		"functionDeclaration", "functionBody", "typeTypeOrVoid", "qualifiedNameList", 
-		"formalParameters", "formalParameterList", "formalParameter", "lastFormalParameter", 
-		"variableModifier", "qualifiedName", "fieldDeclaration", "constructorDeclaration", 
-		"variableDeclarators", "variableDeclarator", "variableDeclaratorId", "variableInitializer", 
-		"arrayInitializer", "classOrInterfaceType", "typeArgument", "literal", 
-		"integerLiteral", "floatLiteral", "prog", "block", "blockStatements", 
-		"blockStatement", "statement", "switchBlockStatementGroup", "switchLabel", 
-		"forControl", "forInit", "enhancedForControl", "parExpression", "expressionList", 
-		"functionCall", "expression", "primary", "typeList", "typeType", "functionType", 
-		"primitiveType", "creator", "superSuffix", "arguments"
-	};
+	private static String[] makeRuleNames() {
+		return new String[] {
+			"classDeclaration", "classBody", "classBodyDeclaration", "memberDeclaration", 
+			"functionDeclaration", "functionBody", "typeTypeOrVoid", "qualifiedNameList", 
+			"formalParameters", "formalParameterList", "formalParameter", "lastFormalParameter", 
+			"variableModifier", "qualifiedName", "fieldDeclaration", "constructorDeclaration", 
+			"variableDeclarators", "variableDeclarator", "variableDeclaratorId", 
+			"variableInitializer", "arrayInitializer", "classOrInterfaceType", "typeArgument", 
+			"literal", "integerLiteral", "floatLiteral", "prog", "block", "blockStatements", 
+			"blockStatement", "statement", "switchBlockStatementGroup", "switchLabel", 
+			"forControl", "forInit", "enhancedForControl", "parExpression", "expressionList", 
+			"functionCall", "expression", "primary", "typeList", "typeType", "functionType", 
+			"primitiveType", "creator", "superSuffix", "arguments"
+		};
+	}
+	public static final String[] ruleNames = makeRuleNames();
 
-	private static final String[] _LITERAL_NAMES = {
-		null, "'abstract'", "'assert'", "'boolean'", "'break'", "'byte'", "'case'", 
-		"'catch'", "'char'", "'class'", "'const'", "'continue'", "'default'", 
-		"'do'", "'double'", "'else'", "'enum'", "'extends'", "'final'", "'finally'", 
-		"'float'", "'for'", "'if'", "'goto'", "'implements'", "'import'", "'instanceof'", 
-		"'int'", "'interface'", "'long'", "'native'", "'new'", "'package'", "'private'", 
-		"'protected'", "'public'", "'return'", "'short'", "'static'", "'strictfp'", 
-		"'super'", "'switch'", "'synchronized'", "'this'", "'throw'", "'throws'", 
-		"'transient'", "'try'", "'void'", "'volatile'", "'while'", "'function'", 
-		"'string'", null, null, null, null, null, null, null, null, null, "'null'", 
-		"'('", "')'", "'{'", "'}'", "'['", "']'", "';'", "','", "'.'", "'='", 
-		"'>'", "'<'", "'!'", "'~'", "'?'", "':'", "'=='", "'<='", "'>='", "'!='", 
-		"'&&'", "'||'", "'++'", "'--'", "'+'", "'-'", "'*'", "'/'", "'&'", "'|'", 
-		"'^'", "'%'", "'+='", "'-='", "'*='", "'/='", "'&='", "'|='", "'^='", 
-		"'%='", "'<<='", "'>>='", "'>>>='", "'->'", "'::'", "'@'", "'...'"
-	};
-	private static final String[] _SYMBOLIC_NAMES = {
-		null, "ABSTRACT", "ASSERT", "BOOLEAN", "BREAK", "BYTE", "CASE", "CATCH", 
-		"CHAR", "CLASS", "CONST", "CONTINUE", "DEFAULT", "DO", "DOUBLE", "ELSE", 
-		"ENUM", "EXTENDS", "FINAL", "FINALLY", "FLOAT", "FOR", "IF", "GOTO", "IMPLEMENTS", 
-		"IMPORT", "INSTANCEOF", "INT", "INTERFACE", "LONG", "NATIVE", "NEW", "PACKAGE", 
-		"PRIVATE", "PROTECTED", "PUBLIC", "RETURN", "SHORT", "STATIC", "STRICTFP", 
-		"SUPER", "SWITCH", "SYNCHRONIZED", "THIS", "THROW", "THROWS", "TRANSIENT", 
-		"TRY", "VOID", "VOLATILE", "WHILE", "FUNCTION", "STRING", "DECIMAL_LITERAL", 
-		"HEX_LITERAL", "OCT_LITERAL", "BINARY_LITERAL", "FLOAT_LITERAL", "HEX_FLOAT_LITERAL", 
-		"BOOL_LITERAL", "CHAR_LITERAL", "STRING_LITERAL", "NULL_LITERAL", "LPAREN", 
-		"RPAREN", "LBRACE", "RBRACE", "LBRACK", "RBRACK", "SEMI", "COMMA", "DOT", 
-		"ASSIGN", "GT", "LT", "BANG", "TILDE", "QUESTION", "COLON", "EQUAL", "LE", 
-		"GE", "NOTEQUAL", "AND", "OR", "INC", "DEC", "ADD", "SUB", "MUL", "DIV", 
-		"BITAND", "BITOR", "CARET", "MOD", "ADD_ASSIGN", "SUB_ASSIGN", "MUL_ASSIGN", 
-		"DIV_ASSIGN", "AND_ASSIGN", "OR_ASSIGN", "XOR_ASSIGN", "MOD_ASSIGN", "LSHIFT_ASSIGN", 
-		"RSHIFT_ASSIGN", "URSHIFT_ASSIGN", "ARROW", "COLONCOLON", "AT", "ELLIPSIS", 
-		"WS", "COMMENT", "LINE_COMMENT", "IDENTIFIER"
-	};
+	private static String[] makeLiteralNames() {
+		return new String[] {
+			null, "'abstract'", "'assert'", "'boolean'", "'break'", "'byte'", "'case'", 
+			"'catch'", "'char'", "'class'", "'const'", "'continue'", "'default'", 
+			"'do'", "'double'", "'else'", "'enum'", "'extends'", "'final'", "'finally'", 
+			"'float'", "'for'", "'if'", "'goto'", "'implements'", "'import'", "'instanceof'", 
+			"'int'", "'interface'", "'long'", "'native'", "'new'", "'package'", "'private'", 
+			"'protected'", "'public'", "'return'", "'short'", "'static'", "'strictfp'", 
+			"'super'", "'switch'", "'synchronized'", "'this'", "'throw'", "'throws'", 
+			"'transient'", "'try'", "'void'", "'volatile'", "'while'", "'function'", 
+			"'string'", null, null, null, null, null, null, null, null, null, "'null'", 
+			"'('", "')'", "'{'", "'}'", "'['", "']'", "';'", "','", "'.'", "'='", 
+			"'>'", "'<'", "'!'", "'~'", "'?'", "':'", "'=='", "'<='", "'>='", "'!='", 
+			"'&&'", "'||'", "'++'", "'--'", "'+'", "'-'", "'*'", "'/'", "'&'", "'|'", 
+			"'^'", "'%'", "'+='", "'-='", "'*='", "'/='", "'&='", "'|='", "'^='", 
+			"'%='", "'<<='", "'>>='", "'>>>='", "'->'", "'::'", "'@'", "'...'"
+		};
+	}
+	private static final String[] _LITERAL_NAMES = makeLiteralNames();
+	private static String[] makeSymbolicNames() {
+		return new String[] {
+			null, "ABSTRACT", "ASSERT", "BOOLEAN", "BREAK", "BYTE", "CASE", "CATCH", 
+			"CHAR", "CLASS", "CONST", "CONTINUE", "DEFAULT", "DO", "DOUBLE", "ELSE", 
+			"ENUM", "EXTENDS", "FINAL", "FINALLY", "FLOAT", "FOR", "IF", "GOTO", 
+			"IMPLEMENTS", "IMPORT", "INSTANCEOF", "INT", "INTERFACE", "LONG", "NATIVE", 
+			"NEW", "PACKAGE", "PRIVATE", "PROTECTED", "PUBLIC", "RETURN", "SHORT", 
+			"STATIC", "STRICTFP", "SUPER", "SWITCH", "SYNCHRONIZED", "THIS", "THROW", 
+			"THROWS", "TRANSIENT", "TRY", "VOID", "VOLATILE", "WHILE", "FUNCTION", 
+			"STRING", "DECIMAL_LITERAL", "HEX_LITERAL", "OCT_LITERAL", "BINARY_LITERAL", 
+			"FLOAT_LITERAL", "HEX_FLOAT_LITERAL", "BOOL_LITERAL", "CHAR_LITERAL", 
+			"STRING_LITERAL", "NULL_LITERAL", "LPAREN", "RPAREN", "LBRACE", "RBRACE", 
+			"LBRACK", "RBRACK", "SEMI", "COMMA", "DOT", "ASSIGN", "GT", "LT", "BANG", 
+			"TILDE", "QUESTION", "COLON", "EQUAL", "LE", "GE", "NOTEQUAL", "AND", 
+			"OR", "INC", "DEC", "ADD", "SUB", "MUL", "DIV", "BITAND", "BITOR", "CARET", 
+			"MOD", "ADD_ASSIGN", "SUB_ASSIGN", "MUL_ASSIGN", "DIV_ASSIGN", "AND_ASSIGN", 
+			"OR_ASSIGN", "XOR_ASSIGN", "MOD_ASSIGN", "LSHIFT_ASSIGN", "RSHIFT_ASSIGN", 
+			"URSHIFT_ASSIGN", "ARROW", "COLONCOLON", "AT", "ELLIPSIS", "WS", "COMMENT", 
+			"LINE_COMMENT", "IDENTIFIER"
+		};
+	}
+	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
 	public static final Vocabulary VOCABULARY = new VocabularyImpl(_LITERAL_NAMES, _SYMBOLIC_NAMES);
 
 	/**
@@ -147,6 +157,7 @@ public class PlayScriptParser extends Parser {
 		super(input);
 		_interp = new ParserATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
 	}
+
 	public static class ClassDeclarationContext extends ParserRuleContext {
 		public TerminalNode CLASS() { return getToken(PlayScriptParser.CLASS, 0); }
 		public TerminalNode IDENTIFIER() { return getToken(PlayScriptParser.IDENTIFIER, 0); }
@@ -218,6 +229,8 @@ public class PlayScriptParser extends Parser {
 	}
 
 	public static class ClassBodyContext extends ParserRuleContext {
+		public TerminalNode LBRACE() { return getToken(PlayScriptParser.LBRACE, 0); }
+		public TerminalNode RBRACE() { return getToken(PlayScriptParser.RBRACE, 0); }
 		public List<ClassBodyDeclarationContext> classBodyDeclaration() {
 			return getRuleContexts(ClassBodyDeclarationContext.class);
 		}
@@ -269,6 +282,7 @@ public class PlayScriptParser extends Parser {
 	}
 
 	public static class ClassBodyDeclarationContext extends ParserRuleContext {
+		public TerminalNode SEMI() { return getToken(PlayScriptParser.SEMI, 0); }
 		public MemberDeclarationContext memberDeclaration() {
 			return getRuleContext(MemberDeclarationContext.class,0);
 		}
@@ -394,6 +408,14 @@ public class PlayScriptParser extends Parser {
 		public TypeTypeOrVoidContext typeTypeOrVoid() {
 			return getRuleContext(TypeTypeOrVoidContext.class,0);
 		}
+		public List<TerminalNode> LBRACK() { return getTokens(PlayScriptParser.LBRACK); }
+		public TerminalNode LBRACK(int i) {
+			return getToken(PlayScriptParser.LBRACK, i);
+		}
+		public List<TerminalNode> RBRACK() { return getTokens(PlayScriptParser.RBRACK); }
+		public TerminalNode RBRACK(int i) {
+			return getToken(PlayScriptParser.RBRACK, i);
+		}
 		public TerminalNode THROWS() { return getToken(PlayScriptParser.THROWS, 0); }
 		public QualifiedNameListContext qualifiedNameList() {
 			return getRuleContext(QualifiedNameListContext.class,0);
@@ -472,6 +494,7 @@ public class PlayScriptParser extends Parser {
 		public BlockContext block() {
 			return getRuleContext(BlockContext.class,0);
 		}
+		public TerminalNode SEMI() { return getToken(PlayScriptParser.SEMI, 0); }
 		public FunctionBodyContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -578,6 +601,10 @@ public class PlayScriptParser extends Parser {
 		public QualifiedNameContext qualifiedName(int i) {
 			return getRuleContext(QualifiedNameContext.class,i);
 		}
+		public List<TerminalNode> COMMA() { return getTokens(PlayScriptParser.COMMA); }
+		public TerminalNode COMMA(int i) {
+			return getToken(PlayScriptParser.COMMA, i);
+		}
 		public QualifiedNameListContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -623,6 +650,8 @@ public class PlayScriptParser extends Parser {
 	}
 
 	public static class FormalParametersContext extends ParserRuleContext {
+		public TerminalNode LPAREN() { return getToken(PlayScriptParser.LPAREN, 0); }
+		public TerminalNode RPAREN() { return getToken(PlayScriptParser.RPAREN, 0); }
 		public FormalParameterListContext formalParameterList() {
 			return getRuleContext(FormalParameterListContext.class,0);
 		}
@@ -672,6 +701,10 @@ public class PlayScriptParser extends Parser {
 		}
 		public FormalParameterContext formalParameter(int i) {
 			return getRuleContext(FormalParameterContext.class,i);
+		}
+		public List<TerminalNode> COMMA() { return getTokens(PlayScriptParser.COMMA); }
+		public TerminalNode COMMA(int i) {
+			return getToken(PlayScriptParser.COMMA, i);
 		}
 		public LastFormalParameterContext lastFormalParameter() {
 			return getRuleContext(LastFormalParameterContext.class,0);
@@ -809,6 +842,7 @@ public class PlayScriptParser extends Parser {
 		public TypeTypeContext typeType() {
 			return getRuleContext(TypeTypeContext.class,0);
 		}
+		public TerminalNode ELLIPSIS() { return getToken(PlayScriptParser.ELLIPSIS, 0); }
 		public VariableDeclaratorIdContext variableDeclaratorId() {
 			return getRuleContext(VariableDeclaratorIdContext.class,0);
 		}
@@ -898,6 +932,10 @@ public class PlayScriptParser extends Parser {
 		public TerminalNode IDENTIFIER(int i) {
 			return getToken(PlayScriptParser.IDENTIFIER, i);
 		}
+		public List<TerminalNode> DOT() { return getTokens(PlayScriptParser.DOT); }
+		public TerminalNode DOT(int i) {
+			return getToken(PlayScriptParser.DOT, i);
+		}
 		public QualifiedNameContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -946,6 +984,7 @@ public class PlayScriptParser extends Parser {
 		public VariableDeclaratorsContext variableDeclarators() {
 			return getRuleContext(VariableDeclaratorsContext.class,0);
 		}
+		public TerminalNode SEMI() { return getToken(PlayScriptParser.SEMI, 0); }
 		public FieldDeclarationContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -1042,6 +1081,10 @@ public class PlayScriptParser extends Parser {
 		public VariableDeclaratorContext variableDeclarator(int i) {
 			return getRuleContext(VariableDeclaratorContext.class,i);
 		}
+		public List<TerminalNode> COMMA() { return getTokens(PlayScriptParser.COMMA); }
+		public TerminalNode COMMA(int i) {
+			return getToken(PlayScriptParser.COMMA, i);
+		}
 		public VariableDeclaratorsContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -1092,6 +1135,7 @@ public class PlayScriptParser extends Parser {
 		public VariableDeclaratorIdContext variableDeclaratorId() {
 			return getRuleContext(VariableDeclaratorIdContext.class,0);
 		}
+		public TerminalNode ASSIGN() { return getToken(PlayScriptParser.ASSIGN, 0); }
 		public VariableInitializerContext variableInitializer() {
 			return getRuleContext(VariableInitializerContext.class,0);
 		}
@@ -1137,6 +1181,14 @@ public class PlayScriptParser extends Parser {
 
 	public static class VariableDeclaratorIdContext extends ParserRuleContext {
 		public TerminalNode IDENTIFIER() { return getToken(PlayScriptParser.IDENTIFIER, 0); }
+		public List<TerminalNode> LBRACK() { return getTokens(PlayScriptParser.LBRACK); }
+		public TerminalNode LBRACK(int i) {
+			return getToken(PlayScriptParser.LBRACK, i);
+		}
+		public List<TerminalNode> RBRACK() { return getTokens(PlayScriptParser.RBRACK); }
+		public TerminalNode RBRACK(int i) {
+			return getToken(PlayScriptParser.RBRACK, i);
+		}
 		public VariableDeclaratorIdContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -1250,11 +1302,17 @@ public class PlayScriptParser extends Parser {
 	}
 
 	public static class ArrayInitializerContext extends ParserRuleContext {
+		public TerminalNode LBRACE() { return getToken(PlayScriptParser.LBRACE, 0); }
+		public TerminalNode RBRACE() { return getToken(PlayScriptParser.RBRACE, 0); }
 		public List<VariableInitializerContext> variableInitializer() {
 			return getRuleContexts(VariableInitializerContext.class);
 		}
 		public VariableInitializerContext variableInitializer(int i) {
 			return getRuleContext(VariableInitializerContext.class,i);
+		}
+		public List<TerminalNode> COMMA() { return getTokens(PlayScriptParser.COMMA); }
+		public TerminalNode COMMA(int i) {
+			return getToken(PlayScriptParser.COMMA, i);
 		}
 		public ArrayInitializerContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -1330,6 +1388,10 @@ public class PlayScriptParser extends Parser {
 		public TerminalNode IDENTIFIER(int i) {
 			return getToken(PlayScriptParser.IDENTIFIER, i);
 		}
+		public List<TerminalNode> DOT() { return getTokens(PlayScriptParser.DOT); }
+		public TerminalNode DOT(int i) {
+			return getToken(PlayScriptParser.DOT, i);
+		}
 		public ClassOrInterfaceTypeContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -1380,6 +1442,7 @@ public class PlayScriptParser extends Parser {
 		public TypeTypeContext typeType() {
 			return getRuleContext(TypeTypeContext.class,0);
 		}
+		public TerminalNode QUESTION() { return getToken(PlayScriptParser.QUESTION, 0); }
 		public TerminalNode EXTENDS() { return getToken(PlayScriptParser.EXTENDS, 0); }
 		public TerminalNode SUPER() { return getToken(PlayScriptParser.SUPER, 0); }
 		public TypeArgumentContext(ParserRuleContext parent, int invokingState) {
@@ -1652,9 +1715,11 @@ public class PlayScriptParser extends Parser {
 	}
 
 	public static class BlockContext extends ParserRuleContext {
+		public TerminalNode LBRACE() { return getToken(PlayScriptParser.LBRACE, 0); }
 		public BlockStatementsContext blockStatements() {
 			return getRuleContext(BlockStatementsContext.class,0);
 		}
+		public TerminalNode RBRACE() { return getToken(PlayScriptParser.RBRACE, 0); }
 		public BlockContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -1737,6 +1802,7 @@ public class PlayScriptParser extends Parser {
 		public VariableDeclaratorsContext variableDeclarators() {
 			return getRuleContext(VariableDeclaratorsContext.class,0);
 		}
+		public TerminalNode SEMI() { return getToken(PlayScriptParser.SEMI, 0); }
 		public StatementContext statement() {
 			return getRuleContext(StatementContext.class,0);
 		}
@@ -1821,12 +1887,17 @@ public class PlayScriptParser extends Parser {
 		}
 		public TerminalNode ELSE() { return getToken(PlayScriptParser.ELSE, 0); }
 		public TerminalNode FOR() { return getToken(PlayScriptParser.FOR, 0); }
+		public TerminalNode LPAREN() { return getToken(PlayScriptParser.LPAREN, 0); }
 		public ForControlContext forControl() {
 			return getRuleContext(ForControlContext.class,0);
 		}
+		public TerminalNode RPAREN() { return getToken(PlayScriptParser.RPAREN, 0); }
 		public TerminalNode WHILE() { return getToken(PlayScriptParser.WHILE, 0); }
 		public TerminalNode DO() { return getToken(PlayScriptParser.DO, 0); }
+		public TerminalNode SEMI() { return getToken(PlayScriptParser.SEMI, 0); }
 		public TerminalNode SWITCH() { return getToken(PlayScriptParser.SWITCH, 0); }
+		public TerminalNode LBRACE() { return getToken(PlayScriptParser.LBRACE, 0); }
+		public TerminalNode RBRACE() { return getToken(PlayScriptParser.RBRACE, 0); }
 		public List<SwitchBlockStatementGroupContext> switchBlockStatementGroup() {
 			return getRuleContexts(SwitchBlockStatementGroupContext.class);
 		}
@@ -1846,7 +1917,7 @@ public class PlayScriptParser extends Parser {
 		public TerminalNode BREAK() { return getToken(PlayScriptParser.BREAK, 0); }
 		public TerminalNode IDENTIFIER() { return getToken(PlayScriptParser.IDENTIFIER, 0); }
 		public TerminalNode CONTINUE() { return getToken(PlayScriptParser.CONTINUE, 0); }
-		public TerminalNode SEMI() { return getToken(PlayScriptParser.SEMI, 0); }
+		public TerminalNode COLON() { return getToken(PlayScriptParser.COLON, 0); }
 		public StatementContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -2144,6 +2215,7 @@ public class PlayScriptParser extends Parser {
 		public ExpressionContext constantExpression;
 		public Token enumConstantName;
 		public TerminalNode CASE() { return getToken(PlayScriptParser.CASE, 0); }
+		public TerminalNode COLON() { return getToken(PlayScriptParser.COLON, 0); }
 		public ExpressionContext expression() {
 			return getRuleContext(ExpressionContext.class,0);
 		}
@@ -2215,6 +2287,10 @@ public class PlayScriptParser extends Parser {
 		public ExpressionListContext forUpdate;
 		public EnhancedForControlContext enhancedForControl() {
 			return getRuleContext(EnhancedForControlContext.class,0);
+		}
+		public List<TerminalNode> SEMI() { return getTokens(PlayScriptParser.SEMI); }
+		public TerminalNode SEMI(int i) {
+			return getToken(PlayScriptParser.SEMI, i);
 		}
 		public ForInitContext forInit() {
 			return getRuleContext(ForInitContext.class,0);
@@ -2352,6 +2428,7 @@ public class PlayScriptParser extends Parser {
 		public VariableDeclaratorIdContext variableDeclaratorId() {
 			return getRuleContext(VariableDeclaratorIdContext.class,0);
 		}
+		public TerminalNode COLON() { return getToken(PlayScriptParser.COLON, 0); }
 		public ExpressionContext expression() {
 			return getRuleContext(ExpressionContext.class,0);
 		}
@@ -2389,9 +2466,11 @@ public class PlayScriptParser extends Parser {
 	}
 
 	public static class ParExpressionContext extends ParserRuleContext {
+		public TerminalNode LPAREN() { return getToken(PlayScriptParser.LPAREN, 0); }
 		public ExpressionContext expression() {
 			return getRuleContext(ExpressionContext.class,0);
 		}
+		public TerminalNode RPAREN() { return getToken(PlayScriptParser.RPAREN, 0); }
 		public ParExpressionContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -2429,6 +2508,10 @@ public class PlayScriptParser extends Parser {
 		}
 		public ExpressionContext expression(int i) {
 			return getRuleContext(ExpressionContext.class,i);
+		}
+		public List<TerminalNode> COMMA() { return getTokens(PlayScriptParser.COMMA); }
+		public TerminalNode COMMA(int i) {
+			return getToken(PlayScriptParser.COMMA, i);
 		}
 		public ExpressionListContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -2476,6 +2559,8 @@ public class PlayScriptParser extends Parser {
 
 	public static class FunctionCallContext extends ParserRuleContext {
 		public TerminalNode IDENTIFIER() { return getToken(PlayScriptParser.IDENTIFIER, 0); }
+		public TerminalNode LPAREN() { return getToken(PlayScriptParser.LPAREN, 0); }
+		public TerminalNode RPAREN() { return getToken(PlayScriptParser.RPAREN, 0); }
 		public ExpressionListContext expressionList() {
 			return getRuleContext(ExpressionListContext.class,0);
 		}
@@ -2589,8 +2674,51 @@ public class PlayScriptParser extends Parser {
 		public ExpressionContext expression(int i) {
 			return getRuleContext(ExpressionContext.class,i);
 		}
+		public TerminalNode ADD() { return getToken(PlayScriptParser.ADD, 0); }
+		public TerminalNode SUB() { return getToken(PlayScriptParser.SUB, 0); }
+		public TerminalNode INC() { return getToken(PlayScriptParser.INC, 0); }
+		public TerminalNode DEC() { return getToken(PlayScriptParser.DEC, 0); }
+		public TerminalNode TILDE() { return getToken(PlayScriptParser.TILDE, 0); }
+		public TerminalNode BANG() { return getToken(PlayScriptParser.BANG, 0); }
+		public TerminalNode MUL() { return getToken(PlayScriptParser.MUL, 0); }
+		public TerminalNode DIV() { return getToken(PlayScriptParser.DIV, 0); }
+		public TerminalNode MOD() { return getToken(PlayScriptParser.MOD, 0); }
+		public List<TerminalNode> LT() { return getTokens(PlayScriptParser.LT); }
+		public TerminalNode LT(int i) {
+			return getToken(PlayScriptParser.LT, i);
+		}
+		public List<TerminalNode> GT() { return getTokens(PlayScriptParser.GT); }
+		public TerminalNode GT(int i) {
+			return getToken(PlayScriptParser.GT, i);
+		}
+		public TerminalNode LE() { return getToken(PlayScriptParser.LE, 0); }
+		public TerminalNode GE() { return getToken(PlayScriptParser.GE, 0); }
+		public TerminalNode EQUAL() { return getToken(PlayScriptParser.EQUAL, 0); }
+		public TerminalNode NOTEQUAL() { return getToken(PlayScriptParser.NOTEQUAL, 0); }
+		public TerminalNode BITAND() { return getToken(PlayScriptParser.BITAND, 0); }
+		public TerminalNode CARET() { return getToken(PlayScriptParser.CARET, 0); }
+		public TerminalNode BITOR() { return getToken(PlayScriptParser.BITOR, 0); }
+		public TerminalNode AND() { return getToken(PlayScriptParser.AND, 0); }
+		public TerminalNode OR() { return getToken(PlayScriptParser.OR, 0); }
+		public TerminalNode COLON() { return getToken(PlayScriptParser.COLON, 0); }
+		public TerminalNode QUESTION() { return getToken(PlayScriptParser.QUESTION, 0); }
+		public TerminalNode ASSIGN() { return getToken(PlayScriptParser.ASSIGN, 0); }
+		public TerminalNode ADD_ASSIGN() { return getToken(PlayScriptParser.ADD_ASSIGN, 0); }
+		public TerminalNode SUB_ASSIGN() { return getToken(PlayScriptParser.SUB_ASSIGN, 0); }
+		public TerminalNode MUL_ASSIGN() { return getToken(PlayScriptParser.MUL_ASSIGN, 0); }
+		public TerminalNode DIV_ASSIGN() { return getToken(PlayScriptParser.DIV_ASSIGN, 0); }
+		public TerminalNode AND_ASSIGN() { return getToken(PlayScriptParser.AND_ASSIGN, 0); }
+		public TerminalNode OR_ASSIGN() { return getToken(PlayScriptParser.OR_ASSIGN, 0); }
+		public TerminalNode XOR_ASSIGN() { return getToken(PlayScriptParser.XOR_ASSIGN, 0); }
+		public TerminalNode RSHIFT_ASSIGN() { return getToken(PlayScriptParser.RSHIFT_ASSIGN, 0); }
+		public TerminalNode URSHIFT_ASSIGN() { return getToken(PlayScriptParser.URSHIFT_ASSIGN, 0); }
+		public TerminalNode LSHIFT_ASSIGN() { return getToken(PlayScriptParser.LSHIFT_ASSIGN, 0); }
+		public TerminalNode MOD_ASSIGN() { return getToken(PlayScriptParser.MOD_ASSIGN, 0); }
+		public TerminalNode DOT() { return getToken(PlayScriptParser.DOT, 0); }
 		public TerminalNode IDENTIFIER() { return getToken(PlayScriptParser.IDENTIFIER, 0); }
 		public TerminalNode THIS() { return getToken(PlayScriptParser.THIS, 0); }
+		public TerminalNode LBRACK() { return getToken(PlayScriptParser.LBRACK, 0); }
+		public TerminalNode RBRACK() { return getToken(PlayScriptParser.RBRACK, 0); }
 		public TypeTypeContext typeType() {
 			return getRuleContext(TypeTypeContext.class,0);
 		}
@@ -2998,9 +3126,11 @@ public class PlayScriptParser extends Parser {
 	}
 
 	public static class PrimaryContext extends ParserRuleContext {
+		public TerminalNode LPAREN() { return getToken(PlayScriptParser.LPAREN, 0); }
 		public ExpressionContext expression() {
 			return getRuleContext(ExpressionContext.class,0);
 		}
+		public TerminalNode RPAREN() { return getToken(PlayScriptParser.RPAREN, 0); }
 		public TerminalNode THIS() { return getToken(PlayScriptParser.THIS, 0); }
 		public TerminalNode SUPER() { return getToken(PlayScriptParser.SUPER, 0); }
 		public LiteralContext literal() {
@@ -3090,6 +3220,10 @@ public class PlayScriptParser extends Parser {
 		public TypeTypeContext typeType(int i) {
 			return getRuleContext(TypeTypeContext.class,i);
 		}
+		public List<TerminalNode> COMMA() { return getTokens(PlayScriptParser.COMMA); }
+		public TerminalNode COMMA(int i) {
+			return getToken(PlayScriptParser.COMMA, i);
+		}
 		public TypeListContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -3143,6 +3277,14 @@ public class PlayScriptParser extends Parser {
 		}
 		public PrimitiveTypeContext primitiveType() {
 			return getRuleContext(PrimitiveTypeContext.class,0);
+		}
+		public List<TerminalNode> LBRACK() { return getTokens(PlayScriptParser.LBRACK); }
+		public TerminalNode LBRACK(int i) {
+			return getToken(PlayScriptParser.LBRACK, i);
+		}
+		public List<TerminalNode> RBRACK() { return getTokens(PlayScriptParser.RBRACK); }
+		public TerminalNode RBRACK(int i) {
+			return getToken(PlayScriptParser.RBRACK, i);
 		}
 		public TypeTypeContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -3225,6 +3367,8 @@ public class PlayScriptParser extends Parser {
 		public TypeTypeOrVoidContext typeTypeOrVoid() {
 			return getRuleContext(TypeTypeOrVoidContext.class,0);
 		}
+		public TerminalNode LPAREN() { return getToken(PlayScriptParser.LPAREN, 0); }
+		public TerminalNode RPAREN() { return getToken(PlayScriptParser.RPAREN, 0); }
 		public TypeListContext typeList() {
 			return getRuleContext(TypeListContext.class,0);
 		}
@@ -3356,6 +3500,7 @@ public class PlayScriptParser extends Parser {
 		public ArgumentsContext arguments() {
 			return getRuleContext(ArgumentsContext.class,0);
 		}
+		public TerminalNode DOT() { return getToken(PlayScriptParser.DOT, 0); }
 		public TerminalNode IDENTIFIER() { return getToken(PlayScriptParser.IDENTIFIER, 0); }
 		public SuperSuffixContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -3413,6 +3558,8 @@ public class PlayScriptParser extends Parser {
 	}
 
 	public static class ArgumentsContext extends ParserRuleContext {
+		public TerminalNode LPAREN() { return getToken(PlayScriptParser.LPAREN, 0); }
+		public TerminalNode RPAREN() { return getToken(PlayScriptParser.RPAREN, 0); }
 		public ExpressionListContext expressionList() {
 			return getRuleContext(ExpressionListContext.class,0);
 		}

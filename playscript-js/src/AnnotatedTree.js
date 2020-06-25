@@ -1,10 +1,14 @@
 const CompilationLog = require('./CompilationLog')
 
 class AnnotatedTree {
-  anst = null
+  // AST
+  ast = null
   types = []
+  // AST节点对应的symbol
   symbolOfNode = new Map()
+  // AST节点对应的scope，如for, 函数调用会启动新的scope
   node2Scope = new Map()
+  // 用于做类型推断
   typeOfNode = new Map()
   logs = []
 

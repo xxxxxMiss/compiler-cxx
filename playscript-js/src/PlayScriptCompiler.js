@@ -4,6 +4,7 @@ const { PlayScriptLexer } = require('./PlayScriptLexer')
 const { PlayScriptParser } = require('./PlayScriptParser')
 const ParseTreeWalker = antlr4.tree.ParseTreeWalker
 const TypeAndScopeScanner = require('./TypeAndScopeScanner')
+const ASTEvaluator = require('./ASTEvaluator')
 
 class PlayScriptCompiler {
   // AnnotatedTree
@@ -29,6 +30,11 @@ class PlayScriptCompiler {
     walker.walk(pass1, this.at.ast)
 
     return this.at
+  }
+
+  execute(at) {
+    const visitor = new ASTEvaluator(at)
+    return visitor.visit(at.ast)
   }
 }
 

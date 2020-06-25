@@ -2,6 +2,7 @@ const { PlayScriptListener } = require('./PlayScriptListener')
 const AnnotatedTree = require('./AnnotatedTree')
 const { PlayScriptParser } = require('./PlayScriptParser')
 const NameSpace = require('./NameSpace')
+const BlockScope = require('./BlockScope')
 
 class TypeAndScopeScanner extends PlayScriptListener {
   constructor(at) {
@@ -40,7 +41,7 @@ class TypeAndScopeScanner extends PlayScriptListener {
 
   enterBlock(ctx) {
     if (!(ctx.parent instanceof PlayScriptParser.FunctionBodyContext)) {
-      const scope = new PlayScriptParser.BlockScope(this.currentScope(), ctx)
+      const scope = new BlockScope(this.currentScope(), ctx)
       this.currentScope().addSymbol(scope)
       this.pushScope(scope, ctx)
     }
