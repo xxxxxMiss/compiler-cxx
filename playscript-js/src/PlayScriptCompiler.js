@@ -3,6 +3,7 @@ const AnnotatedTree = require('./AnnotatedTree')
 const { PlayScriptLexer } = require('./PlayScriptLexer')
 const { PlayScriptParser } = require('./PlayScriptParser')
 const ParseTreeWalker = antlr4.tree.ParseTreeWalker
+const TypeAndScopeScanner = require('./TypeAndScopeScanner')
 
 class PlayScriptCompiler {
   // AnnotatedTree
@@ -22,10 +23,12 @@ class PlayScriptCompiler {
     this.at.ast = this.parser.prog()
     // 语义分析
     const walker = new ParseTreeWalker()
-   
+
     // 多步的语义解析
-    const pass1 = new TypeAndScopeScanner(at)
+    const pass1 = new TypeAndScopeScanner(this.at)
     walker.walk(pass1, this.at.ast)
+
+    return this.at
   }
 }
 

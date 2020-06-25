@@ -1,4 +1,4 @@
-// Generated from /Users/qsch/workspace/compiler-cxx/playscript-js/CommonLexer.g4 by ANTLR 4.7.1
+// Generated from /Users/qsch/workspace/compiler-cxx/playscript-js/demo/CommonLexer.g4 by ANTLR 4.7.1
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.Token;

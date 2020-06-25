@@ -30,6 +30,15 @@ class AnnotatedTree {
     // TODO:
     // console.log(log)
   }
+
+  hasCompilationError() {
+    for (let log of this.logs) {
+      if (log.type === CompilationLog.ERROR) {
+        return true
+      }
+    }
+    return false
+  }
 }
 
 module.exports = AnnotatedTree

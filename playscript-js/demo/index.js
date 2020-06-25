@@ -9,6 +9,7 @@ var lexer = new MyGrammarLexer(chars);
 var tokens  = new antlr4.CommonTokenStream(lexer);
 var parser = new MyGrammarParser(tokens);
 parser.buildParseTrees = true;
+// parser.setBuildParseTree(false)
 var tree = parser.expression();
 // console.log(tree)
 

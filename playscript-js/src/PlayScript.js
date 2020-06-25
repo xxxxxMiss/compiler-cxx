@@ -1,4 +1,4 @@
-const PlayScriptCompiler = require("./PlayScriptCompiler")
+const PlayScriptCompiler = require('./PlayScriptCompiler')
 const readline = require('readline')
 
 class PlayScript {
@@ -40,7 +40,7 @@ class PlayScript {
     const compiler = new PlayScriptCompiler()
     const rl = readline.createInterface({
       input: process.stdin,
-      output: process.stdout
+      output: process.stdout,
     })
 
     rl.prompt()
@@ -57,12 +57,12 @@ class PlayScript {
         // 解析
         const at = compiler.compile(script + scriptLet, verbose, ast_dump)
         console.log('=========', at)
-        if (!at.hasCompilationError()) {
-          const result = compiler.Excute(at)
-          console.log(result)
-          script = script + scriptLet
-        }
-        scriptLet = ''
+        // if (!at.hasCompilationError()) {
+        //   const result = compiler.Excute(at)
+        //   console.log(result)
+        //   script = script + scriptLet
+        // }
+        // scriptLet = ''
       }
     })
   }

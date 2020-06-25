@@ -191,13 +191,14 @@ expression
     // | expression '::' typeArguments? IDENTIFIER
     // | typeType '::' (typeArguments? IDENTIFIER | NEW)
     // | classType '::' typeArguments? NEW
+    | SEMI
     ;
 
 primary
     : '(' expression ')'
     | THIS
     // | SUPER
-    | literal
+    | literal {console.log($literal.text)}
     | IDENTIFIER
     // | typeTypeOrVoid '.' CLASS
     ;

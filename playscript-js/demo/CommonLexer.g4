@@ -17,6 +17,8 @@ IDENTIFIER: [a-zA-Z_]([a-zA-Z_]|[0-9])*;
 
 StringLiteral:     '"' (~["\\\r\n] | EscapeSequence)* '"';
 
+SEMI: ';';
+
 fragment EscapeSequence
     : '\\' [btnfr"'\\]
     | '\\' ([0-3]? [0-7])? [0-7]
@@ -25,4 +27,6 @@ fragment EscapeSequence
 
 fragment HexDigit
     : [0-9a-fA-F]
-    ;  
+    ;
+
+WS: [ \r\t\n]+ -> skip;

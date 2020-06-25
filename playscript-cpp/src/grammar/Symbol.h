@@ -18,6 +18,6 @@ namespace play {
     // Symbol关联的AST节点
     antlr4::ParserRuleContext* ctx;
 
-    std::string toString();
+    
   };
 } // namespace play
