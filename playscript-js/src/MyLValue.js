@@ -2,6 +2,7 @@ const LValue = require('./LValue')
 
 class MyLValue extends LValue {
   constructor(valueContainer, variable) {
+    super()
     this.valueContainer = valueContainer
     this.variable = variable
   }

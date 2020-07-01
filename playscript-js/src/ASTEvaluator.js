@@ -154,7 +154,13 @@ class ASTEvaluator extends PlayScriptVisitor {
     }
     return rtn
   }
-  visitVariableDeclaratorId(ctx) {}
+  visitVariableDeclaratorId(ctx) {
+    let rtn = null
+    let symbol = this.at.symbolOfNode.get(ctx)
+    // TODO: 取引用还是值?
+    rtn = this.getLValue(symbol)
+    return rtn
+  }
   visitVariableInitializer(ctx) {
     let rtn = null
     if (ctx.expression() != null) {
@@ -166,7 +172,7 @@ class ASTEvaluator extends PlayScriptVisitor {
   // 各种各样的表达式....
   visitExpression(ctx) {
     let rtn = null
-    if (ctx.bop() != null && ctx.expression().length >= 2) {
+    if (ctx.bop != null && ctx.expression().length >= 2) {
       let left = this.visitExpression(ctx.expression(0))
       let right = this.visitExpression(ctx.expression(1))
       let leftObject = left
@@ -202,10 +208,7 @@ class ASTEvaluator extends PlayScriptVisitor {
           break
       }
       // . operator
-    } else if (
-      ctx.bop() != null &&
-      ctx.bop.getType() === PlayScriptParser.DOT
-    ) {
+    } else if (ctx.bop != null && ctx.bop.getType() === PlayScriptParser.DOT) {
       let leftObject = this.visitExpression(ctx.expression(0))
       if (leftObject instanceof LValue) {
         let value = leftObject.getValue()
