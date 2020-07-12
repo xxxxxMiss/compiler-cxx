@@ -10,7 +10,7 @@ class Scope extends Symbol {
     symbol.enclosingScope = this
   }
 
-  getVariable(scope, name) {
+  static getVariable(scope, name) {
     if (typeof scope === 'string' && name == null) {
       name = scope
       scope = this

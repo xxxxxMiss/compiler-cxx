@@ -43,6 +43,23 @@ class AnnotatedTree {
     }
     return false
   }
+
+  /**
+   * 查找某节点所在的scope
+   * @param {*} ctx
+   */
+  enclosingScopeOfNode(ctx) {
+    let rtn = null
+    // TODO: ctx上没有getParent方法？？？
+    let parent = ctx.getParent()
+    if (parent != null) {
+      rtn = this.node2Scope.get(parent)
+      if (rtn == null) {
+        this.enclosingScopeOfNode(parent)
+      }
+    }
+    return rtn
+  }
 }
 
 module.exports = AnnotatedTree

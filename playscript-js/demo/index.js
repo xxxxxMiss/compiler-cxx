@@ -1,22 +1,22 @@
-var antlr4 = require('antlr4');
-var MyGrammarLexer = require('./MyGrammarLexer').MyGrammarLexer;
-var MyGrammarParser = require('./MyGrammarParser').MyGrammarParser;
-var MyGrammarListener = require('./MyGrammarListener').MyGrammarListener;
+var antlr4 = require('antlr4')
+var MyGrammarLexer = require('./MyGrammarLexer').MyGrammarLexer
+var MyGrammarParser = require('./MyGrammarParser').MyGrammarParser
+var MyGrammarListener = require('./MyGrammarListener').MyGrammarListener
 
-var input = "a = 3 + 2;"
-var chars = new antlr4.InputStream(input);
-var lexer = new MyGrammarLexer(chars);
-var tokens  = new antlr4.CommonTokenStream(lexer);
-var parser = new MyGrammarParser(tokens);
-parser.buildParseTrees = true;
+var input = 'a = 3 + 2;'
+var chars = new antlr4.InputStream(input)
+var lexer = new MyGrammarLexer(chars)
+var tokens = new antlr4.CommonTokenStream(lexer)
+var parser = new MyGrammarParser(tokens)
+parser.buildParseTrees = true
 // parser.setBuildParseTree(false)
-var tree = parser.expression();
+var tree = parser.expression()
 // console.log(tree)
 
 class Visitor {
   visitChildren(ctx) {
     if (!ctx) {
-      return;
+      return
     }
 
     // if (ctx.children) {
@@ -32,21 +32,21 @@ class Visitor {
   }
 }
 
-tree.accept(new Visitor());
+tree.accept(new Visitor())
 
-var KeyPrinter = function() {
-  MyGrammarListener.call(this); // inherit default listener
-  return this;
-};
+var KeyPrinter = function () {
+  MyGrammarListener.call(this) // inherit default listener
+  return this
+}
 
 // continue inheriting default listener
-KeyPrinter.prototype = Object.create(MyGrammarListener.prototype);
-KeyPrinter.prototype.constructor = KeyPrinter;
+KeyPrinter.prototype = Object.create(MyGrammarListener.prototype)
+KeyPrinter.prototype.constructor = KeyPrinter
 
 // override default listener behavior
-KeyPrinter.prototype.exitExpression = function(ctx) {
-  console.log("Oh, a key!");
-};
+KeyPrinter.prototype.exitExpression = function (ctx) {
+  console.log('Oh, a key!')
+}
 
-var printer = new KeyPrinter();
-antlr4.tree.ParseTreeWalker.DEFAULT.walk(printer, tree);
+var printer = new KeyPrinter()
+antlr4.tree.ParseTreeWalker.DEFAULT.walk(printer, tree)

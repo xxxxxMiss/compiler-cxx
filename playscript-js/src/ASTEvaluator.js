@@ -69,6 +69,7 @@ class ASTEvaluator extends PlayScriptVisitor {
 
     let valueContainer = null
     while (f != null) {
+      console.log('===========', f)
       if (f.scope.containsSymbol(variable)) {
         valueContainer = f.object
         break
