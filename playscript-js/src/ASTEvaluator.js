@@ -4,6 +4,7 @@ const MyLValue = require('./MyLValue')
 const LValue = require('./LValue')
 const BreakObject = require('./BreakObject')
 const { PlayScriptParser } = require('./PlayScriptParser')
+const Variable = require('./Variable')
 
 class ASTEvaluator extends PlayScriptVisitor {
   at = null
@@ -94,18 +95,12 @@ class ASTEvaluator extends PlayScriptVisitor {
 
   // -----------------------
   // ----------visit per node
-  visitBlock(ctx) {
-    // for, if, function等会产生scope
-    const scope = this.at.node2Scope.get(ctx)
-    if (scope != null) {
-      const frame = new StackFrame(scope)
-      this.pushStack(frame)
-    }
-
-    const rtn = this.visitBlockStatements(ctx.blockStatements())
-    if (scope != null) {
-      this.popStack()
-    }
+  visitProg(ctx) {
+    let rtn = null
+    this.pushStack(new StackFrame(this.at.node2Scope.get(ctx)))
+    rtn = this.visitBlockStatements(ctx.blockStatements())
+    // TODO: why pop stack immediately?
+    this.popStack()
     return rtn
   }
 
@@ -124,6 +119,22 @@ class ASTEvaluator extends PlayScriptVisitor {
     return rtn
   }
 
+  visitBlock(ctx) {
+    // for, if, function等会产生scope
+    const scope = this.at.node2Scope.get(ctx)
+    if (scope != null) {
+      // 有些block底下是不对应scope的，比如函数
+      const frame = new StackFrame(scope)
+      this.pushStack(frame)
+    }
+
+    const rtn = this.visitBlockStatements(ctx.blockStatements())
+    if (scope != null) {
+      this.popStack()
+    }
+    return rtn
+  }
+
   visitBlockStatement(ctx) {
     let rtn = null
     if (ctx.variableDeclarators() != null) {
@@ -137,6 +148,7 @@ class ASTEvaluator extends PlayScriptVisitor {
   visitVariableDeclarators(ctx) {
     let rtn = null
     for (let child of ctx.variableDeclarator()) {
+      // TODO: 只返回最后一个变量初始化信息?
       rtn = this.visitVariableDeclarator(child)
     }
     return rtn
@@ -145,6 +157,7 @@ class ASTEvaluator extends PlayScriptVisitor {
   visitVariableDeclarator(ctx) {
     let rtn = null
     let lvalue = this.visitVariableDeclaratorId(ctx.variableDeclaratorId())
+    // TODO: 这个地方对于左值的处理
     if (ctx.variableInitializer() != null) {
       rtn = this.visitVariableInitializer(ctx.variableInitializer())
       if (rtn instanceof LValue) {
@@ -228,7 +241,83 @@ class ASTEvaluator extends PlayScriptVisitor {
           }
         }
       }
+    } else if (ctx.primary() != null) {
+      rtn = this.visitPrimary(ctx.primary())
     }
+
+    return rtn
+  }
+
+  visitPrimary(ctx) {
+    let rtn = null
+
+    if (ctx.literal() != null) {
+      // 字面量
+      rtn = this.visitLiteral(ctx.literal())
+    } else if (ctx.IDENTIFIER() != null) {
+      // 变量
+      const symbol = this.at.symbolOfNode.get(ctx)
+      if (symbol instanceof Variable) {
+        rtn = this.getLValue(symbol)
+      } else if (symbol instanceof Function) {
+        rtn = new FunctionObject(symbol)
+      }
+    } else if (ctx.expression() != null) {
+      // 括号括起来的变量
+      rtn = this.visitExpression(ctx.expression())
+    } else if (ctx.THIS() != null) {
+      // this
+      const thisRef = this.at.symbolOfNode.get(ctx)
+      rtn = this.getLValue(thisRef)
+    } else if (ctx.SUPER() != null) {
+      // super
+      const superRef = this.at.symbolOfNode.get(ctx)
+      rtn = this.getLValue(superRef)
+    }
+    return rtn
+  }
+
+  visitLiteral(ctx) {
+    let rtn = null
+
+    if (ctx.integerLiteral() != null) {
+      // 整数
+      rtn = this.visitIntegerLiteral(ctx.integerLiteral())
+    } else if (ctx.floatLiteral() != null) {
+      // 浮点数
+      rtn = this.visitFloatLiteral(ctx.floatLiteral())
+    } else if (ctx.BOOL_LITERAL() != null) {
+      // 布尔值
+      // TODO: Boolean.TRUE || Boolean.FALSE
+      if (ctx.BOOL_LITERAL().getText() === 'true') {
+        rtn = true
+      } else {
+        rtn = false
+      }
+    } else if (ctx.STRING_LITERAL() != null) {
+      // 字符串，取到的文本是带有双引号的
+      const withQuotationMark = ctx.STRING_LITERAL().getText()
+      rtn = withQuotationMark.substring(1, withQuotationMark.length - 1)
+    } else if (ctx.CHAR_LITERAL() != null) {
+      // TODO: 带有单引号吗？
+      rtn = ctx.CHAR_LITERAL().getText()
+    } else if (ctx.NULL_LITERAL() != null) {
+      rtn = NullObject.instance()
+    }
+    return rtn
+  }
+
+  visitIntegerLiteral(ctx) {
+    let rtn = null
+    if (ctx.DECIMAL_LITERAL() != null) {
+      // 十进制
+      rtn = ctx.DECIMAL_LITERAL().getText()
+    }
+    // else if () {
+    // TODO: 其他进制
+    // }
+    console.log('============', rtn)
+    return rtn
   }
 
   add(obj1, obj2, targetType) {

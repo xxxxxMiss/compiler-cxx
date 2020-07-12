@@ -51,6 +51,26 @@ class TypeAndScopeScanner extends PlayScriptListener {
       this.popScope()
     }
   }
+
+  enterStatement(ctx) {
+    // 为FOR建立额外的scope
+    if (ctx.FOR() != null) {
+      const scope = new BlockScope(this.currentScope(), ctx)
+      this.currentScope().addSymbol(scope)
+      this.pushScope(scope, ctx)
+    }
+  }
+  exitStatement(ctx) {
+    if (ctx.FOR() != null) {
+      this.popScope()
+    }
+  }
+
+  enterFunctionDeclaration(ctx) {}
+  exitFunctionDeclaration(ctx) {}
+
+  enterClassDeclaration(ctx) {}
+  exitClassDeclaration(ctx) {}
 }
 
 module.exports = TypeAndScopeScanner

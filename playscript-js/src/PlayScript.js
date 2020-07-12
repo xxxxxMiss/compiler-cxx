@@ -70,9 +70,10 @@ class PlayScript {
 
 // PlayScript.REPL()
 
-const script =
-  'int age = 44; for(int i = 0;i<10;i++) { age = age + 2;} int i = 8;'
+// const script =
+//   'int age = 44; for(int i = 0;i<10;i++) { age = age + 2;} int i = 8;'
 
+const script = 'int age = 44;'
 const compiler = new PlayScriptCompiler()
 const at = compiler.compile(script)
 console.log(at)

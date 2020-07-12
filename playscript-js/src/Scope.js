@@ -1,4 +1,6 @@
 const Symbol = require('./Symbol')
+const Variable = require('./Variable')
+const Class = require('./Class')
 
 class Scope extends Symbol {
   symbols = []
@@ -24,6 +26,19 @@ class Scope extends Symbol {
   // TODO: primitive type or reference type
   containsSymbol(symbol) {
     return this.symbols.includes(symbol)
+  }
+
+  getClass(scope, name) {
+    if (typeof scope === 'string') {
+      name = scope
+      scope = this
+    }
+    for (let s of scope.symbols) {
+      if (s instanceof Class && s.name === name) {
+        return s
+      }
+    }
+    return null
   }
 
   toString() {

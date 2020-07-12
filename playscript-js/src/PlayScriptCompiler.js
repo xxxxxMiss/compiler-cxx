@@ -26,6 +26,7 @@ class PlayScriptCompiler {
     const walker = new ParseTreeWalker()
 
     // 多步的语义解析
+    // 类型和scope
     const pass1 = new TypeAndScopeScanner(this.at)
     walker.walk(pass1, this.at.ast)
 
