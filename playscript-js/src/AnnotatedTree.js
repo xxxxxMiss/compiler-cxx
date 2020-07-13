@@ -12,10 +12,53 @@ class AnnotatedTree {
   typeOfNode = new Map()
   logs = []
 
+  /**
+   *  通过名称查找变量，逐级Scope查找
+   * @param {*} scope
+   * @param {*} idName
+   */
   lookupVariable(scope, idName) {
     let rtn = scope.getVariable(idName)
     if (rtn == null && rtn.enclosingScope != null) {
       rtn = this.lookupVariable(scope.enclosingScope, idName)
+    }
+    return rtn
+  }
+
+  /**
+   * 通过名称查找class
+   * @param {*} scope
+   * @param {*} idName
+   */
+  lookupClass(scope, idName) {
+    let rtn = scope.getClass(idName)
+    if (rtn == null && scope.enclosingScope != null) {
+      rtn = this.lookupClass(scope.enclosingScope, idName)
+    }
+    return rtn
+  }
+
+  lookupType(idName) {
+    let rtn = null
+    for (let type of this.types) {
+      if (type.getName() === idName) {
+        rtn = type
+        break
+      }
+    }
+    return rtn
+  }
+
+  /**
+   * 通过函数签名来查找函数，逐级scope查找
+   * @param {*} scope
+   * @param {*} idName
+   * @param {*} paramTypes
+   */
+  lookupFunction(scope, idName, paramTypes) {
+    let rtn = scope.getFunction(idName, paramTypes)
+    if (rtn == null && scope.enclosingScope != null) {
+      rtn = this.lookupFunction(scope.enclosingScope, idName, paramTypes)
     }
     return rtn
   }
